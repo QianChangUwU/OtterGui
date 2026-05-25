@@ -54,7 +54,7 @@ public static class ImGuiClip
         using var clipper = ImUtf8.ListClipper(data.Count, lineHeight);
         while (clipper.Step())
         {
-            for (var actualRow = clipper.DisplayStart; actualRow < clipper.DisplayEnd; actualRow++)
+            for (var actualRow = clipper.DisplayStart; actualRow < clipper.DisplayEnd + 1; actualRow++)
             {
                 if (actualRow >= data.Count)
                     return;

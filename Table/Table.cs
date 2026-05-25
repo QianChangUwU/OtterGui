@@ -41,8 +41,7 @@ public class Table<T>
       | ImGuiTableFlags.ScrollX
       | ImGuiTableFlags.PreciseWidths
       | ImGuiTableFlags.SizingFixedFit
-      | ImGuiTableFlags.BordersInnerV
-      | ImGuiTableFlags.NoBordersInBodyUntilResize;
+      | ImGuiTableFlags.BordersInnerV;
 
     public int TotalItems
         => Items.Count;
@@ -80,6 +79,8 @@ public class Table<T>
 
     protected virtual void PreDraw()
     { }
+
+    public void SetFilterDirty() => FilterDirty = true;
 
     private void SortInternal()
     {
@@ -182,6 +183,8 @@ public class Table<T>
 
         SortInternal();
         _currentIdx = 0;
+
+        // TODO: I can't be asked to try and figure out why this doesn't scale properly
         ImGuiClip.ClippedDraw(FilteredItems, DrawItem, ItemHeight);
     }
 }
